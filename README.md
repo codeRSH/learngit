@@ -30,7 +30,7 @@ git config --global core.safecrlf true   # This is used to ensure that the binar
 
 - Create a folder learngit and add this file `learngit.md` in it. Additionally create a new `hello.py` program.
 
-``` git
+```git
 mkdir learngit
 cd learngit
 touch learngit.md hello.py
@@ -40,7 +40,7 @@ touch learngit.md hello.py
 
 - To create a repository out of a directory run the following command:
 
-``` git
+```git
 git init
 ```
 
@@ -50,13 +50,13 @@ git init
 
 We can also use `git add .`  to add all the files in current directory to the staging area. But we should ensure to run `git status` first to ensure nothing gets unintentionally.
 
-``` git
+```git
 git add hello.py
 ```
 
 ## Check Repository status
 
-``` git
+```git
 git status
 ```
 
@@ -64,7 +64,7 @@ git status
 
 - We commit the changes using commit command . We should provide -m flag to provide meaningful message along with commit. If -m flag is forgotten then it will automatically open an editor for you to add the commit message.
 
-``` git
+```git
 git commit -m "my meaninful commit message"
 ```
 
@@ -175,4 +175,141 @@ git tag
 
 ```git
 git hist master --all
+```
+
+## Cloning Repositories
+
+- A repostiory on github exists is called a `remote` respository. We may create a local copy of the remote repository on our local computer by first determining the full url of the repository on github. This can be found by using the 'clone' button on the repository page. Then we use the following command:
+
+```git
+git clone https://github.com/codeRSH/learngit.git  # Full URL of your remote repo here.
+```
+
+## Undo Changes
+
+- To undo changes *before staging* the changes, we can simply checkout the last correct version (usually master).
+
+```git
+git checkout master
+```
+
+- To undo the changes *after staging* we can use the `reset` command. The `reset` command resets the staging area to be whatever is in HEAD . This clears the staging area of the change we just staged. But we should still do `git checkout master` to get the last commited version and remove the unwanted changes from the file.
+
+
+```git
+git add hello.py # Add modified file in staging area
+git status
+
+git reset HEAD hello.py # To remove file from staging area
+
+git checkout master   # To actually revert the changes back to last version.
+```
+
+- To undo the changes *after commit* we should ideally create a new commit to revert the unwated changes. Instead of HEAD (which we revert the most recent version) we can use the hash of any commit to revert to that particular version.
+
+```git
+git add hello.py # Add modified file in staging area
+git commit -m "Unwated changes commited"
+
+git revert HEAD # This will open the editor to ask for revert comments.
+
+git log   # We can now see both the wanted commited as well as the revert commit.
+```
+
+- We can also undo the changes *after commit* `permanently` by using the `reset` command. What this will do is that it will remove (hide) the incorrect commit from the log history. `--hard` parameter ensures that the working directory also gets updated with the new branch head.
+
+```git
+git tag oops   # Tag the current commit as oops
+git hist
+
+git reset --hard v1 # v1 is the tag of the version which we want to commit but we can also provide the hash value instead.
+
+git hist  # Now the unwanted commits will not be visible.
+git hist --all ## This parameter will show the unwanted commits also.
+
+git tag -d oops  # This removes an existing tag.
+git hist --all   # Now the unwated commits are not seen anymore because of removed tag
+```
+
+However, care should be taken to use the reset command on remote repositories as it can cause confusion with the other users.
+
+## Amending Commits
+
+- To commit an additional change with the latest commit we can do the following.
+
+```git
+git add hello.py    # Partial change
+git commit -m "Add an author name"
+
+
+git add hello.py    # After making addtional change here.
+git commit --amend -m "Add author name and email"
+
+git hist  # Review the changes
+```
+
+## Moving Files
+
+- Two ways to move the files and inform git about it.
+
+  - Directly move the file through git. Advantage is that git immediately knows about the move and keeps the changes in the staging area.
+
+  ```git
+  mk dir lib
+  git mv hello.py lib
+  git status
+  ```
+
+  - Fir move the file through OS commands and later inform git about it.
+
+  ```git
+  mk dir lib
+  mv hello.py lib
+  git add lib/hello.py
+  git rm hello.py  # Removes file from staging area, and from working directory if available there.
+  git status
+  ```
+
+## Git Directory structure
+
+```git
+ls .git  # Shows the structure of folder where all git "stuff" is stored.
+ls .git/objects # Shows a bunch of directories with names correspnonding to first 2 letters of hash of the objects stored in git
+ls .git/objetcs/<dir> # Shows the file which contain the objects stored in git. These files are encoded but are used to identify the object version.
+
+cat .git/config # This is a project specific config file and will override .gitconfig in $HOME
+
+ls .git/refs   # Shows the way to reference the commits
+ls .git/refs/heads  # Shows the ways to reference branches
+ls .git/refs/tags # Shows all the tags created for commits
+cat .git/refs/tags/v1   # Tag v1 simply points to the hash code of corresponding commit.
+
+cat .git/HEAD   # HEAD file contains the reference to the current branch. Usually points to master by default.
+
+```
+
+## Working wiht Git Objects
+
+- We can make use of the `git type` and `git dump` aliases we defined earlier to traverse and see the content of the files and structure inside git object.
+
+```git
+git cat-file -t <hash>    # Shows the type of the commit object
+git cat-file -p <hash>    # Shows the corresponding dump of the commit object
+
+git cat-file -p <treehash>    # We can use the hash of the tree to further traverse inside (folder/ git structure)
+
+git cat-file -p <blobhash>  # Blobhash will probably show the content of the corresponding file
+
+```
+
+## Creating a Branch
+
+- A Branch can be defined to isolate any changes from the master (branch).
+
+```git
+git branch <branchname>
+git checkout <branchname>
+
+git checkout -b <branchname> # Short cut for above 2 commands
+
 ```
