@@ -1,14 +1,12 @@
 # Learning Git
 
-## 23/04/2020
+Alright guys. So this is a tutoral to learn git. While I have learnt it many times, I want to this time also document it properly, so that I don't end up forgetting it once more.
 
-Alright guys. So today I am going to learn git. While I have learnt it many times, I want to this time also document it properly, so that I don't end up forgetting it once more.
-
-Now I don't use it often so it's OK if I do forget some of the syntax. But the idea here is that, to have a *self created* ready reference of the things I should know and why I should do it. Because the thing with git is that while learning the basic commands of git is easy, I end up forgetting the underlying philosphy or reason to do something. That then just doesn't work with me.
+Now I don't use it often so it's OK if I do forget some of the syntax. But the idea here is to have a *self created* ready reference of the things I should know and why I should do it. Because the thing with git is that while learning the basic commands is easy, I end up forgetting the underlying philosphy or reason to do something. That then just doesn't work with me.
 
 Alright, enough said. Let's get started.
 
-OK so the way I plan to learn it is to use **gitimmersion** site. And probably this document itself can be used to just learn the basics of the git syncing.
+OK so the way I plan to learn it is to use **Git Immersion** site. And probably this document itself can be used to just learn the basics of the git syncing.
 
 ## Setting up Name and Email and other settings
 
