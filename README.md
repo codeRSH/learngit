@@ -311,3 +311,13 @@ git checkout <branchname>
 git checkout -b <branchname> # Short cut for above 2 commands
 
 ```
+
+## Switch Between Branches
+
+- To Simply switch between branches we can use 'git checkout` :
+
+```git
+git checkout master
+```
+
+
