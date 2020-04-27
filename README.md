@@ -320,4 +320,18 @@ git checkout -b <branchname> # Short cut for above 2 commands
 git checkout master
 ```
 
+## To see diversion between branches
+
+- Use `git log` along with `--graph` parameter.  All use `--all` flag to ensure all branches are shown in the log.
+
+## Merging the Branches
+
+- If master branch got changed while working on another branch (say 'greet') then we can make use of `git merge` to get the master changes into the greet branch. But this cause ugle graphs in the log. So probably  `git rebase` is better to use.
+
+```git
+git checkout greet
+git merge master
+
+git hist --all
+```
 
