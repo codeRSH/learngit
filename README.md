@@ -229,7 +229,7 @@ git tag -d oops  # This removes an existing tag.
 git hist --all   # Now the unwated commits are not seen anymore because of removed tag
 ```
 
-However, care should be taken to use the reset command on remote repositories as it can cause confusion with the other users.
+However, care should be taken to use the reset command on remote repositories as it can cause confusion with the other users. Using reset we can modify the branch pointer to point to anywhere in the commit tree.
 
 ## Amending Commits
 
@@ -320,4 +320,28 @@ git checkout -b <branchname> # Short cut for above 2 commands
 git checkout master
 ```
 
+## To see diversion between branches
 
+- Use `git log` along with `--graph` parameter.  All use `--all` flag to ensure all branches are shown in the log.
+
+## Merging the Branches
+
+- If master branch got changed while working on another branch (say 'greet') then we can make use of `git merge` to get the master changes into the greet branch. But this cause ugle graphs in the log. So probably  `git rebase` is better to use.
+
+```git
+git checkout greet
+git merge master
+
+git hist --all
+```
+
+## Rebasing the Branches
+
+- The advantage of rebase is that here the greet branch is 'overwrTo rebase the branch :
+
+```git
+git checkout greet  # greet is another branch name
+git rebase master
+
+git hist
+```
