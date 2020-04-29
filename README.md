@@ -175,14 +175,6 @@ git tag
 git hist master --all
 ```
 
-## Cloning Repositories
-
-- A repostiory on github exists is called a `remote` respository. We may create a local copy of the remote repository on our local computer by first determining the full url of the repository on github. This can be found by using the 'clone' button on the repository page. Then we use the following command:
-
-```git
-git clone https://github.com/codeRSH/learngit.git  # Full URL of your remote repo here.
-```
-
 ## Undo Changes
 
 - To undo changes *before staging* the changes, we can simply checkout the last correct version (usually master).
@@ -333,9 +325,6 @@ git checkout greet
 git merge master
 
 git hist --all
-
-git checkout master
-git merge greet # To merge greet branch changes into master
 ```
 
 ## Rebasing the Branches
@@ -359,3 +348,39 @@ git hist
 
 - So usually we should use Rebase for short-lived, local branches and merge for branches in the public repository.
 
+## Fast Forward Merge
+
+- If the head of one branch is already a direct ancestor of another, the merge simply moves the head in the commit tree. This is called fast forwarding and there is no chance of conflict here.
+
+```git
+git checkout master
+git merge greet # To merge greet branch changes into master
+
+git hist
+```
+
+## Cloning Repositories
+
+### Local Cloning
+
+- To do a local clone we use below command. This creates an exact copy of the original repo with all the files and folder. The commit history is also copied as is, only difference being the name of the repo will be different in the cloned repo.
+
+```git
+git clone hello cloned_hello  # Here hello is existing repo
+```
+
+### Remote Cloning
+
+- A repostiory on github exists is called a `remote` respository. We may create a local copy of the remote repository on our local computer by first determining the full url of the repository on github. This can be found by using the 'clone' button on the repository page. Then we use the following command:
+
+```git
+git clone https://github.com/codeRSH/learngit.git  # Full URL of your remote repo here.
+```
+
+## Remote Repository
+
+- To check the name of the remote repository use below :
+
+```git
+git remote
+```
