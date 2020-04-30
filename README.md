@@ -384,3 +384,19 @@ git clone https://github.com/codeRSH/learngit.git  # Full URL of your remote rep
 ```git
 git remote
 ```
+
+- To get more information about origin:
+
+```git
+git remote show origin
+```
+
+## Check list of branches
+
+- Git has all the commits from the original repository, but branches in remore repository are not treated as local branches. To see the list of branches
+
+```git
+git branch    # To see list of local branches
+git branch -a # To see list of all branches (local + remote )
+```
+
