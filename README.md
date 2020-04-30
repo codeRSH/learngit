@@ -185,7 +185,6 @@ git checkout master
 
 - To undo the changes *after staging* we can use the `reset` command. The `reset` command resets the staging area to be whatever is in HEAD . This clears the staging area of the change we just staged. But we should still do `git checkout master` to get the last commited version and remove the unwanted changes from the file.
 
-
 ```git
 git add hello.py # Add modified file in staging area
 git status
@@ -398,5 +397,68 @@ git remote show origin
 ```git
 git branch    # To see list of local branches
 git branch -a # To see list of all branches (local + remote )
+```
+
+## Fetch Changes from Remote Repo
+
+- `git fetch` command will fetch new commits from the remote repository, but it will not merge these commits in the local branches. Once data is fetched we can then amnually merge the changes using `git merge`.
+
+```git
+git fetch
+
+git merge origin/master
+```
+
+- We can combine the effect of `git fetch` and `git merge origin/master` using simply `git pull`
+
+```git
+git pull
+```
+
+## Tracking Branch
+
+- We can add a local branch to track a remote branch (other than remote/master).
+
+```git
+git branch --track greet origin/greet
+git brach -a
+git hist # greet local branch will now show along with origin/greet
+```
+
+## Bare Repositories
+
+- Bare Repositories are without working directory. They are usually used for sharing.
+- Conventionally repositories ending in '.git' are bare repositories. Essentially it is nothing but the .git directory of a non-bare repo.
+
+```git
+cd ..
+git clone --bare learngit learngit.git
+ls learngit.git
+```
+
+## Adding a Remote Repository
+
+- We can add the bare repository as a remote to any existing repository.
+
+```git
+cd learngit
+git remote add shared ../learngit.git
+```
+
+## Pushing change to remote repository
+
+- To push the change to remote repository we use:
+
+```git
+git push shared master
+# Here shared is the remote repo name and master is the branch of local repo receiving the changes.
+```
+
+- Usually we have to provide both the remote repo and remote branch name while pushing the changes.
+
+## Pull changes from Remote Repository
+
+```git
+git pull shared master
 ```
 
