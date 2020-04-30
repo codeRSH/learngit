@@ -384,7 +384,7 @@ git clone https://github.com/codeRSH/learngit.git  # Full URL of your remote rep
 git remote
 ```
 
-- To get more information about origin:
+- Conventionally a Remote repository (Primary Central repo) is called as 'origin'. To get more information about origin:
 
 ```git
 git remote show origin
@@ -459,6 +459,22 @@ git push shared master
 ## Pull changes from Remote Repository
 
 ```git
+git remote add shared ../learngit.git # Add learngit repository as a remote repo.
+git branch --track shared master
 git pull shared master
 ```
+
+## Advanced Topics
+
+- Some of the topics to research by own:
+  - Reverting Committed Changes
+  - Cross OS Line Endings
+  - Remote Servers
+  - Protocols
+  - SSH Setup
+  - Remote Branch Management
+  - Finding Buggy Commits (git bisect)
+  - Workflows
+  - Non-command line tools (gitx, gitk, magit)
+  - Working with GitHub
 
